@@ -5,7 +5,7 @@
     [  5,   6,   7,   8]
   Region SurfaceDamageRegion (this=75190f7b0088 count=1)
     [  9,   10,   11,   12]
-      layerStack=   1, z=        4, pos=(20,30), size=(3840,3840), crop=[  0,   0,  -1,  -1], finalCrop=[  0,   0,  -1,  -1], isOpaque=0, invalidate=1, dataspace=Default, defaultPixelFormat=RGBx_8888, color=(0.000,0.000,0.000,1.000), flags=0x00000000, tr=[1.00, 0.00][0.00, 1.00]
+      layerStack=   1, z=        4, pos=(20,30), size=(3840,3840), crop=[  0,   0,  -1,  -1], finalCrop=[  0,   0,  -1,  -1], isOpaque=1, invalidate=1, dataspace=Default, defaultPixelFormat=RGBx_8888, color=(0.000,0.000,0.000,1.000), flags=0x00000000, tr=[1.00, 0.00][0.00, 1.00]
       parent=mAboveAppWindowsContainers#0
       zOrderRelativeOf=none
       activeBuffer=[   0x   0:   0,Unknown/None], queued-frames=0, mRefreshPending=0, windowType=-1, appId=-1

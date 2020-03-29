@@ -36,6 +36,7 @@ class BufferLayerTest {
         assertEquals(Pair(3840, 3840), bufferLayer.size)
         assertEquals(Rect(0, 0, -1, -1), bufferLayer.crop)
         assertEquals(Rect(0, 0, -1, -1), bufferLayer.finalCrop)
+        assertEquals(true, bufferLayer.isOpaque)
         assertEquals("mAboveAppWindowsContainers#0", bufferLayer.parent)
     }
 }

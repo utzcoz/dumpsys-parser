@@ -11,6 +11,7 @@ open class BufferLayer(
     val size: Pair<Int, Int>,
     val crop: Rect,
     val finalCrop: Rect,
+    val isOpaque: Boolean,
     val parent: String?
 ) {
     companion object {
@@ -51,11 +52,11 @@ open class BufferLayer(
             val damageRegion = damageRegionPart.first
             left = damageRegionPart.second
             // Parse layer stack
-            val layerStackPart = parseLayerStack(left)
+            val layerStackPart = parseAssignAndComma(left)
             val layerStack = layerStackPart.first
             left = layerStackPart.second
             // Parse z
-            val zPart = parseZ(left)
+            val zPart = parseAssignAndComma(left)
             val z = zPart.first
             left = zPart.second
             // Parse position
@@ -74,6 +75,11 @@ open class BufferLayer(
             val finalCropPart = parseSquareBracket(left)
             val finalCrop = finalCropPart.first
             left = finalCropPart.second
+            // Parse isOpaque
+            // We should remove comma the previous part left.
+            val isOpaquePart = parseAssignAndComma(left.replaceFirst(",", ""))
+            val isOpaque = isOpaquePart.first.trim().toInt() != 0
+            left = isOpaquePart.second
             // Parse parent
             val parent = parseParent(left)
             return BufferLayer(
@@ -87,6 +93,7 @@ open class BufferLayer(
                 size,
                 Rect.parseRect(crop),
                 Rect.parseRect(finalCrop),
+                isOpaque,
                 parent
             )
         }
@@ -96,11 +103,7 @@ open class BufferLayer(
             return Pair(splits[0].trim().toInt(), splits[1].trim().toInt())
         }
 
-        private fun parseLayerStack(input: String): Pair<String, String> {
-            return parse(input, "=", ",")
-        }
-
-        private fun parseZ(input: String): Pair<String, String> {
+        private fun parseAssignAndComma(input: String): Pair<String, String> {
             return parse(input, "=", ",")
         }
 
