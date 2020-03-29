@@ -1,6 +1,9 @@
 package com.utzcoz.parser.dumpsys
 
-open class Rect(val left: Int, val top: Int, val width: Int, val height: Int) {
+import kotlin.math.max
+import kotlin.math.min
+
+open class Rect(val left: Int, val top: Int, val right: Int, val bottom: Int) {
     companion object {
         fun parseRect(input: String): Rect {
             val splits = input.split(",")
@@ -22,15 +25,25 @@ open class Rect(val left: Int, val top: Int, val width: Int, val height: Int) {
         }
         return left == other.left
                 && top == other.top
-                && width == other.width
-                && height == other.height
+                && right == other.right
+                && bottom == other.bottom
     }
 
     override fun hashCode(): Int {
-        return ((left * 32 + top) * 32 + width) * 32 + height
+        return ((left * 32 + top) * 32 + right) * 32 + bottom
     }
 
     override fun toString(): String {
-        return "Rect($left, $top, $width, $height)"
+        return "Rect($left, $top, $right, $bottom)"
     }
+
+    fun isValid(): Boolean = right > left && bottom > top
+
+    fun intersect(rect: Rect): Rect =
+        Rect(
+            max(left, rect.left),
+            max(top, rect.top),
+            min(right, rect.right),
+            min(bottom, rect.bottom)
+        )
 }

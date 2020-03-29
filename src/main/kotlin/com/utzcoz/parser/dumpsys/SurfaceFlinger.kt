@@ -43,7 +43,20 @@ class SurfaceFlinger(val bufferLayers: List<BufferLayer>) {
         } else {
             print("|-- ")
         }
-        println(root.name)
+        val fullRegion = Rect(
+            root.position.first,
+            root.position.second,
+            root.position.first + root.size.first,
+            root.position.second + root.size.second
+        )
+        var finalRegion = fullRegion
+        if (root.crop.isValid()) {
+            finalRegion = finalRegion.intersect(root.crop)
+        }
+        if (root.finalCrop.isValid()) {
+            finalRegion = finalRegion.intersect(root.finalCrop)
+        }
+        println("${root.name}, isOpaque ${root.isOpaque}, region $fullRegion")
         val newIndent = if (isLast) "$indent    " else "$indent|   "
         val childList = childMap[root]
         childList?.let {
