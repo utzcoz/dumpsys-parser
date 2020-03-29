@@ -47,7 +47,6 @@ class SurfaceFlinger(val bufferLayers: List<BufferLayer>) {
                 val currentIsLast = index == childSet.size - 1
                 dumpBufferLayerBranch(child, currentIsLast, newIndent)
             }
-            // New indent is old indent pluses four space.
         }
     }
 }
