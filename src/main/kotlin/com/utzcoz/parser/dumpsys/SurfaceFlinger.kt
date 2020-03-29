@@ -1,10 +1,10 @@
 package com.utzcoz.parser.dumpsys
 
 class SurfaceFlinger(val bufferLayers: List<BufferLayer>) {
-    private val childMap = HashMap<BufferLayer, MutableSet<BufferLayer>>()
+    private val childMap = HashMap<BufferLayer, MutableList<BufferLayer>>()
 
     // We use this field to store the layers without parent.
-    private val rootLayers = HashSet<BufferLayer>()
+    private val rootLayers = ArrayList<BufferLayer>()
 
     init {
         val map = HashMap<String, BufferLayer>()
@@ -12,14 +12,18 @@ class SurfaceFlinger(val bufferLayers: List<BufferLayer>) {
         map.forEach { (_, value) ->
             val parent = map[value.parent]
             if (parent == null) {
+                rootLayers.remove(value)
                 rootLayers.add(value)
+                rootLayers.sortBy { it.name }
             } else {
-                var childSet = childMap[parent]
-                if (childSet == null) {
-                    childSet = HashSet()
+                var childList = childMap[parent]
+                if (childList == null) {
+                    childList = ArrayList()
                 }
-                childSet.add(value)
-                childMap[parent] = childSet
+                childList.remove(value)
+                childList.add(value)
+                childList.sortBy { it.name }
+                childMap[parent] = childList
             }
         }
         map.clear()
@@ -27,7 +31,7 @@ class SurfaceFlinger(val bufferLayers: List<BufferLayer>) {
 
     fun dumpBufferLayerTree() {
         for ((index, layer) in rootLayers.withIndex()) {
-            var isLast = index == rootLayers.size - 1
+            val isLast = index == rootLayers.size - 1
             dumpBufferLayerBranch(layer, isLast, "")
         }
     }
@@ -41,10 +45,10 @@ class SurfaceFlinger(val bufferLayers: List<BufferLayer>) {
         }
         println(root.name)
         val newIndent = if (isLast) "$indent    " else "$indent|   "
-        val childSet = childMap[root]
-        childSet?.let {
-            for ((index, child) in childSet.withIndex()) {
-                val currentIsLast = index == childSet.size - 1
+        val childList = childMap[root]
+        childList?.let {
+            for ((index, child) in childList.withIndex()) {
+                val currentIsLast = index == childList.size - 1
                 dumpBufferLayerBranch(child, currentIsLast, newIndent)
             }
         }
