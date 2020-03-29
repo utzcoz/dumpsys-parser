@@ -23,5 +23,12 @@ class SurfaceFlingerParser {
             }
             return bufferLayers
         }
+
+        fun parse(subCommands: List<String>) {
+        }
+
+        fun showSupportCommands(indent: String) {
+
+        }
     }
 }
