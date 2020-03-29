@@ -23,10 +23,5 @@ class SurfaceFlingerParser {
             }
             return bufferLayers
         }
-
-        @JvmStatic
-        fun main(args: Array<String>) {
-            println("hello world $args")
-        }
     }
 }

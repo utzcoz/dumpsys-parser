@@ -28,7 +28,7 @@ jar {
         attributes(
                 'Implementation-Title': project.name,
                 'Implementation-Version': project.version,
-                'Main-Class': 'com.utzcoz.parser.dumpsys.SurfaceFlingerParser'
+                'Main-Class': 'com.utzcoz.parser.dumpsys.DumpsysParser'
         )
     }
 }
