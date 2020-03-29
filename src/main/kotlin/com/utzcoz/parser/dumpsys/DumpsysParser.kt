@@ -1,5 +1,7 @@
 package com.utzcoz.parser.dumpsys
 
+import java.io.File
+
 class DumpsysParser {
 
     companion object {
@@ -15,21 +17,31 @@ class DumpsysParser {
                 printHelpInfo()
                 return
             }
-            if (list.size < 2 || list[0] != "-p") {
+            if (list.size < 2 || !list.contains("-p")) {
                 println("Please use -p to select parser to parse content")
                 return
             }
-            val parser = list[1]
-            if (list.size < 3 || list[2] != "--") {
+            val parser = list[list.indexOf("-p") + 1]
+            if (list.size < 4 || !list.contains("-f")) {
+                println("Please use -f to provide dumpsys file")
+                return
+            }
+            val filePath = list[list.indexOf("-f") + 1]
+            val file = File(filePath)
+            if (!file.exists()) {
+                println("Please provide exist file with -f")
+                return
+            }
+            if (list.size < 5 || list[4] != "--") {
                 println("Please use -- to separate sub-commands for specific parser")
                 return
             }
-            val subCommands = args.slice(3 until args.size)
+            val subCommands = args.slice(5 until args.size)
             when (parser) {
-                surfaceFlingerParserName -> SurfaceFlingerParser.parse(subCommands)
-                else -> {
+                surfaceFlingerParserName ->
+                    SurfaceFlingerParser.parse(subCommands, file.readText())
+                else ->
                     println("We don't support parser $parser now.")
-                }
             }
         }
 

@@ -6,17 +6,13 @@ import org.junit.Assert.assertNotNull
 import org.junit.Before
 import org.junit.Test
 import java.io.File
-import java.nio.file.Path
-import java.nio.file.Paths
 
 class SurfaceFlingerParserTest {
     private lateinit var surfaceFlingerDumpsysString: String
 
     @Before
     fun setUp() {
-        val path: Path =
-            Paths.get("src", "test", "resources", "aosp-9-normal-dumpsys-surfaceflinger-result")
-        val absolutePath: String = path.toFile().absolutePath
+        val absolutePath: String = TestUtil.getDumpsysSurfaceFlingerTestFilePath()
         surfaceFlingerDumpsysString = File(absolutePath).readText()
     }
 

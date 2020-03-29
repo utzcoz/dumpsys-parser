@@ -2,6 +2,9 @@ package com.utzcoz.parser.dumpsys
 
 class SurfaceFlingerParser {
     companion object {
+        val blTreeCommand = "-bl-tree"
+        val parserName = "surfaceflinger"
+
         fun parseSurfaceFlingerDumpsys(input: String): SurfaceFlinger {
             val bufferLayers = extractBufferLayerPart(input).map { BufferLayer.parseBufferLayer(it) }
             return SurfaceFlinger(bufferLayers)
@@ -24,11 +27,17 @@ class SurfaceFlingerParser {
             return bufferLayers
         }
 
-        fun parse(subCommands: List<String>) {
+        fun parse(subCommands: List<String>, content: String) {
+            if (subCommands.contains(blTreeCommand)) {
+                val surfaceFlinger = parseSurfaceFlingerDumpsys(content)
+                surfaceFlinger.dumpBufferLayerTree()
+                return
+            }
         }
 
         fun showSupportCommands(indent: String) {
-
+            println("$indent$parserName:")
+            println("$indent$indent$blTreeCommand show buffer layer tree")
         }
     }
 }

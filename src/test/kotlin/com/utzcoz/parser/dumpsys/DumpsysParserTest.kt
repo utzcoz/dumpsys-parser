@@ -8,8 +8,8 @@ import java.io.ByteArrayOutputStream
 import java.io.PrintStream
 
 class DumpsysParserTest {
-    val outContent = ByteArrayOutputStream()
-    val originOutContent = System.out
+    private val outContent = ByteArrayOutputStream()
+    private val originOutContent: PrintStream = System.out
 
     @Before
     fun setUp() {
@@ -36,9 +36,11 @@ class DumpsysParserTest {
                 Parse specific info: java -jar dumpsys-result-parser.jar -p PARSE-NAME -- SUB-COMMANDS
 
                 PARSE-NAME:
-                    surfaceflinger: parse dumpsys SurfaceFlinger result
+                    ${SurfaceFlingerParser.parserName}: parse dumpsys SurfaceFlinger result
 
                 SUB-COMMANDS
+                    ${SurfaceFlingerParser.parserName}:
+                        ${SurfaceFlingerParser.blTreeCommand} show buffer layer tree
                 
             """.trimIndent()
         assertEquals(helpCommandPrints, outContent.toString())
@@ -60,7 +62,7 @@ class DumpsysParserTest {
 
     @Test
     fun testWithMinusPOnly() {
-        val args = Array(1) { "-p" }
+        val args = arrayOf("-p")
         DumpsysParser.main(args)
         val prints =
             """
@@ -73,12 +75,29 @@ class DumpsysParserTest {
     }
 
     @Test
-    fun testWithoutMinusMinus() {
-        val args = Array(2) { index -> if (index == 0) "-p" else "surfaceflinger" }
+    fun testWithMinusFOnly() {
+        val filePath = TestUtil.getDumpsysSurfaceFlingerTestFilePath()
+        val args = arrayOf("-f", filePath)
         DumpsysParser.main(args)
         val prints =
             """
-                DumpsysParser arguments [-p, surfaceflinger]
+                DumpsysParser arguments [-f, $filePath]
+
+                Please use -p to select parser to parse content
+                
+            """.trimIndent()
+        assertEquals(prints, outContent.toString())
+    }
+
+    @Test
+    fun testWithoutMinusMinus() {
+        val filePath = TestUtil.getDumpsysSurfaceFlingerTestFilePath()
+        val parseName = SurfaceFlingerParser.parserName
+        val args = arrayOf("-p", parseName, "-f", filePath)
+        DumpsysParser.main(args)
+        val prints =
+            """
+                DumpsysParser arguments [-p, $parseName, -f, $filePath]
 
                 Please use -- to separate sub-commands for specific parser
                 
@@ -87,14 +106,30 @@ class DumpsysParserTest {
     }
 
     @Test
-    fun testWithCompleteSurfaceFlingerCommand() {
-        val args = Array(3) { index ->
-            if (index == 0) "-p" else if (index == 1) "surfaceflinger" else "--"
-        }
+    fun testWithNonExistFile() {
+        val filePath = TestUtil.getDumpsysSurfaceFlingerTestFilePath() + "non-exist"
+        val parseName = SurfaceFlingerParser.parserName
+        val args = arrayOf("-p", parseName, "-f", filePath, "--")
         DumpsysParser.main(args)
         val prints =
             """
-                DumpsysParser arguments [-p, surfaceflinger, --]
+                DumpsysParser arguments [-p, $parseName, -f, $filePath, --]
+
+                Please provide exist file with -f
+
+            """.trimIndent()
+        assertEquals(prints, outContent.toString())
+    }
+
+    @Test
+    fun testWithCompleteSurfaceFlingerCommand() {
+        val filePath = TestUtil.getDumpsysSurfaceFlingerTestFilePath()
+        val parseName = SurfaceFlingerParser.parserName
+        val args = arrayOf("-p", parseName, "-f", filePath, "--")
+        DumpsysParser.main(args)
+        val prints =
+            """
+                DumpsysParser arguments [-p, $parseName, -f, $filePath, --]
 
 
             """.trimIndent()
@@ -103,13 +138,13 @@ class DumpsysParserTest {
 
     @Test
     fun testWithUnsupportedParser() {
-        val args = Array(3) { index ->
-            if (index == 0) "-p" else if (index == 1) "unsupported-parser" else "--"
-        }
+        val parseName = "unsupported-parser"
+        val filePath = TestUtil.getDumpsysSurfaceFlingerTestFilePath()
+        val args = arrayOf("-p", parseName, "-f", filePath, "--")
         DumpsysParser.main(args)
         val prints =
             """
-                DumpsysParser arguments [-p, unsupported-parser, --]
+                DumpsysParser arguments [-p, $parseName, -f, $filePath, --]
 
                 We don't support parser unsupported-parser now.
 
