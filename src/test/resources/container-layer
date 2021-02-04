@@ -1,0 +1,8 @@
++ ContainerLayer (WindowToken{74dc10f android.os.BinderProxy@4cbf9e9}#0)
+  Region TransparentRegion (this=7b3709699000 count=0)
+  Region VisibleRegion (this=7b3709699000 count=0)
+  Region SurfaceDamageRegion (this=7b3709699000 count=0)
+      layerStack=   0, z=        2, pos=(0,0), size=(   0,   0), crop=[  0,   0,  -1,  -1], cornerRadius=0.000000, isProtected=0, isOpaque=0, invalidate=1, dataspace=Default, defaultPixelFormat=Unknown/None, color=(0.000,0.000,0.000,1.000), flags=0x00000000, tr=[0.00, 0.00][0.00, 0.00]
+      parent=mAboveAppWindowsContainers#0
+      zOrderRelativeOf=none
+      activeBuffer=[   0x   0:   0,Unknown/None], tr=[0.00, 0.00][0.00, 0.00] queued-frames=0, mRefreshPending=0, metadata={}

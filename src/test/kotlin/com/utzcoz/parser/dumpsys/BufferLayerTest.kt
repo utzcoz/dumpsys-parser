@@ -13,7 +13,7 @@ class BufferLayerTest {
 
     @Before
     fun setUp() {
-        val path: Path = Paths.get("src", "test", "resources", "buffer-layer")
+        val path: Path = Paths.get("src", "test", "resources", "aosp-9-buffer-layer")
         val absolutePath: String = path.toFile().absolutePath
         bufferLayerTestString = File(absolutePath).readText()
     }
