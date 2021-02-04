@@ -2,8 +2,8 @@ package com.utzcoz.parser.dumpsys
 
 class SurfaceFlingerParser {
     companion object {
-        val blTreeCommand = "-bl-tree"
-        val parserName = "surfaceflinger"
+        const val blTreeCommand = "-bl-tree"
+        const val parserName = "surfaceflinger"
 
         fun parseSurfaceFlingerDumpsys(input: String): SurfaceFlinger {
             val bufferLayers = extractBufferLayerPart(input).map { BufferLayer.parseBufferLayer(it) }
