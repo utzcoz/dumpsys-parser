@@ -19,7 +19,7 @@ dump `SurfaceFlinger` with `dumpsys` and store the result to file `surfaceflinge
 
 Then we should use following command to parse `SurfaceFlinger` result:
  ```shell
- java -jar dumpsys-parser-0.1-all.jar -p surfaceflinger -f surfaceflinger-result.txt -- SUBCOMMDS
+ java -jar dumpsys-parser-0.2-all.jar -p surfaceflinger -f surfaceflinger-result.txt -- SUBCOMMDS
 ```
 
 Currently, we only support `-bl-tree` as sub command. And it will following result:
