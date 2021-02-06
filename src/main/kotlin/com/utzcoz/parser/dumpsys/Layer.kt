@@ -11,21 +11,43 @@ open class Layer(
     val parent: String?
 ) {
     companion object {
-        // TODO update example for AOSP 10
         /**
          * Parse string as following pattern to [Layer].
+         * The ContainerLayer is added from AOSP 10.
          *
-         * + BufferLayer (fe08278 some-package-name#0)
+         * + BufferLayer (specific-buffer-layer-name)
          *  Region TransparentRegion (this=75190f2ed208 count=1)
          *    [  0,   0,   0,   0]
          *  Region VisibleRegion (this=75190f2ed010 count=1)
          *    [  0,   0,   0,   0]
          *  Region SurfaceDamageRegion (this=75190f2ed088 count=1)
          *    [  0,   0,   0,   0]
-         *      layerStack=   0, z=        0, pos=(0,36), size=(3840,3840), crop=[  0,   0,  -1,  -1], finalCrop=[  0,   0,  -1,  -1], isOpaque=0, invalidate=1, dataspace=Default, defaultPixelFormat=RGBx_8888, color=(0.000,0.000,0.000,1.000), flags=0x00000000, tr=[1.00, 0.00][0.00, 1.00]
+         *      layerStack=   0, z=        0, pos=(0,36), size=(3840,3840), some-crop-info, isOpaque=0, other-info
          *      parent=WindowToken{8747db android.os.BinderProxy@81008ea}#0
          *      zOrderRelativeOf=none
-         *      activeBuffer=[   0x   0:   0,Unknown/None], queued-frames=0, mRefreshPending=0, windowType=-1, appId=-1
+         *      other-info
+         * + ContainerLayer (specific-container-layer-name)
+         *  Region TransparentRegion (this=75190f2ed208 count=1)
+         *    [  0,   0,   0,   0]
+         *  Region VisibleRegion (this=75190f2ed010 count=1)
+         *    [  0,   0,   0,   0]
+         *  Region SurfaceDamageRegion (this=75190f2ed088 count=1)
+         *    [  0,   0,   0,   0]
+         *      layerStack=   0, z=        0, pos=(0,36), size=(3840,3840), some-crop-info, isOpaque=0, other-info
+         *      parent=WindowToken{8747db android.os.BinderProxy@81008ea}#0
+         *      zOrderRelativeOf=none
+         *      other-info
+         * + ColorLayer (specific-color-layer-name)
+         *  Region TransparentRegion (this=75190f2ed208 count=1)
+         *    [  0,   0,   0,   0]
+         *  Region VisibleRegion (this=75190f2ed010 count=1)
+         *    [  0,   0,   0,   0]
+         *  Region SurfaceDamageRegion (this=75190f2ed088 count=1)
+         *    [  0,   0,   0,   0]
+         *      layerStack=   0, z=        0, pos=(0,36), size=(3840,3840), some-crop-info, isOpaque=0, other-info
+         *      parent=WindowToken{8747db android.os.BinderProxy@81008ea}#0
+         *      zOrderRelativeOf=none
+         *      other-info
          */
         fun parseLayer(input: String): Layer {
             if (!input.startsWith("+ BufferLayer")
@@ -52,10 +74,13 @@ open class Layer(
 
             // Parse size
             val size = parseSize(input)
+
             // Parse isOpaque
             val isOpaque = parseOpaque(input)
+
             // Parse parent
             val parent = parseParent(input)
+
             return Layer(
                 name,
                 visibleRegion,
