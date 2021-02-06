@@ -6,12 +6,13 @@ class SurfaceFlingerParser {
         const val parserName = "surfaceflinger"
 
         fun parseSurfaceFlingerDumpsys(input: String): SurfaceFlinger {
-            val bufferLayers = extractBufferLayerPart(input).map { BufferLayer.parseBufferLayer(it) }
-            return SurfaceFlinger(bufferLayers)
+            val bufferLayers = extractBufferLayerPart(input).map { Layer.parseLayer(it) }
+            val containerLayers = extractContainerLayerPart(input).map { Layer.parseLayer(it) }
+            val colorLayers = extractColorLayerPart(input).map { Layer.parseLayer(it) }
+            return SurfaceFlinger(bufferLayers + containerLayers + colorLayers)
         }
 
-        private fun extractBufferLayerPart(input: String): List<String> {
-            val anchor = "+ BufferLayer"
+        private fun extractLayerPart(input: String, anchor: String): List<String> {
             var left = input
             var currentIndex = left.indexOf(anchor)
             val bufferLayers = ArrayList<String>()
@@ -25,6 +26,18 @@ class SurfaceFlingerParser {
                 }
             }
             return bufferLayers
+        }
+
+        private fun extractBufferLayerPart(input: String): List<String> {
+            return extractLayerPart(input, "+ BufferLayer")
+        }
+
+        private fun extractContainerLayerPart(input: String): List<String> {
+            return extractLayerPart(input, "+ ContainerLayer")
+        }
+
+        private fun extractColorLayerPart(input: String): List<String> {
+            return extractLayerPart(input, "+ ColorLayer")
         }
 
         fun parse(subCommands: List<String>, content: String) {

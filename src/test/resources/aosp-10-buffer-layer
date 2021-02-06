@@ -4,7 +4,7 @@
   Region VisibleRegion (this=22 count=1)
   Region SurfaceDamageRegion (this=7b3709699000 count=0)
       [  5,   6,   7,    8]
-      layerStack=   0, z=        0, pos=(0,-202), size=(2880,2560), crop=[  0,   0,  -1,  -1], cornerRadius=0.000000, isProtected=0, isOpaque=1, invalidate=0, dataspace=Default, defaultPixelFormat=RGBx_8888, color=(0.000,0.000,0.000,1.000), flags=0x00000002, tr=[0.49, 0.00][0.00, 0.49]
+      layerStack=   1, z=        4, pos=(100,-202), size=(2880,2560), crop=[  0,   0,  -1,  -1], cornerRadius=0.000000, isProtected=0, isOpaque=1, invalidate=0, dataspace=Default, defaultPixelFormat=RGBx_8888, color=(0.000,0.000,0.000,1.000), flags=0x00000002, tr=[0.49, 0.00][0.00, 0.49]
       parent=a4d84df com.android.systemui.ImageWallpaper#0
       zOrderRelativeOf=none
       activeBuffer=[2880x2560:2880,RGBA_8888], tr=[0.00, 0.00][0.00, 0.00] queued-frames=0, mRefreshPending=0, metadata={windowType:2013, ownerUID:10089}

@@ -1,14 +1,14 @@
 package com.utzcoz.parser.dumpsys
 
-class SurfaceFlinger(val bufferLayers: List<BufferLayer>) {
-    private val childMap = HashMap<BufferLayer, MutableList<BufferLayer>>()
+class SurfaceFlinger(val layers: List<Layer>) {
+    private val childMap = HashMap<Layer, MutableList<Layer>>()
 
     // We use this field to store the layers without parent.
-    private val rootLayers = ArrayList<BufferLayer>()
+    private val rootLayers = ArrayList<Layer>()
 
     init {
-        val map = HashMap<String, BufferLayer>()
-        bufferLayers.forEach { map[it.name] = it }
+        val map = HashMap<String, Layer>()
+        layers.forEach { map[it.name] = it }
         map.forEach { (_, value) ->
             val parent = map[value.parent]
             if (parent == null) {
@@ -36,7 +36,7 @@ class SurfaceFlinger(val bufferLayers: List<BufferLayer>) {
         }
     }
 
-    private fun dumpBufferLayerBranch(root: BufferLayer, isLast: Boolean, indent: String) {
+    private fun dumpBufferLayerBranch(root: Layer, isLast: Boolean, indent: String) {
         print(indent)
         if (isLast) {
             print("`-- ")
@@ -49,13 +49,6 @@ class SurfaceFlinger(val bufferLayers: List<BufferLayer>) {
             root.position.first + root.size.first,
             root.position.second + root.size.second
         )
-        var finalRegion = fullRegion
-        if (root.crop.isValid()) {
-            finalRegion = finalRegion.intersect(root.crop)
-        }
-        if (root.finalCrop.isValid()) {
-            finalRegion = finalRegion.intersect(root.finalCrop)
-        }
         println("${root.name}, isOpaque ${root.isOpaque}, region $fullRegion")
         val newIndent = if (isLast) "$indent    " else "$indent|   "
         val childList = childMap[root]

@@ -76,7 +76,7 @@ class DumpsysParserTest {
 
     @Test
     fun testWithMinusFOnly() {
-        val filePath = TestUtil.getDumpsysSurfaceFlingerTestFilePath()
+        val filePath = TestUtil.getAOSP9DumpsysSurfaceFlingerTestFilePath()
         val args = arrayOf("-f", filePath)
         DumpsysParser.main(args)
         val prints =
@@ -91,7 +91,7 @@ class DumpsysParserTest {
 
     @Test
     fun testWithoutMinusMinus() {
-        val filePath = TestUtil.getDumpsysSurfaceFlingerTestFilePath()
+        val filePath = TestUtil.getAOSP9DumpsysSurfaceFlingerTestFilePath()
         val parseName = SurfaceFlingerParser.parserName
         val args = arrayOf("-p", parseName, "-f", filePath)
         DumpsysParser.main(args)
@@ -107,7 +107,7 @@ class DumpsysParserTest {
 
     @Test
     fun testWithNonExistFile() {
-        val filePath = TestUtil.getDumpsysSurfaceFlingerTestFilePath() + "non-exist"
+        val filePath = TestUtil.getAOSP9DumpsysSurfaceFlingerTestFilePath() + "non-exist"
         val parseName = SurfaceFlingerParser.parserName
         val args = arrayOf("-p", parseName, "-f", filePath, "--")
         DumpsysParser.main(args)
@@ -123,7 +123,7 @@ class DumpsysParserTest {
 
     @Test
     fun testWithCompleteSurfaceFlingerCommand() {
-        val filePath = TestUtil.getDumpsysSurfaceFlingerTestFilePath()
+        val filePath = TestUtil.getAOSP9DumpsysSurfaceFlingerTestFilePath()
         val parseName = SurfaceFlingerParser.parserName
         val args = arrayOf("-p", parseName, "-f", filePath, "--")
         DumpsysParser.main(args)
@@ -139,7 +139,7 @@ class DumpsysParserTest {
     @Test
     fun testWithUnsupportedParser() {
         val parseName = "unsupported-parser"
-        val filePath = TestUtil.getDumpsysSurfaceFlingerTestFilePath()
+        val filePath = TestUtil.getAOSP9DumpsysSurfaceFlingerTestFilePath()
         val args = arrayOf("-p", parseName, "-f", filePath, "--")
         DumpsysParser.main(args)
         val prints =
