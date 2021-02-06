@@ -9,7 +9,7 @@ It's self learning project for `Kotlin`, and useful for self development of `AOS
 Use following command to show help information:
 
 ```shell
-java -jar dumpsys-parser-0.1-all.jar -h
+java -jar dumpsys-parser-0.2-all.jar -h
 ```
 
 ## `SurfaceFlinger`
