@@ -1,34 +1,51 @@
 plugins {
-    id 'com.github.johnrengelman.shadow' version '5.2.0'
-    id 'java'
-    id 'org.jetbrains.kotlin.jvm' version '1.3.71'
+	id 'com.github.johnrengelman.shadow' version '5.2.0'
+	id 'java'
+	id 'org.jetbrains.kotlin.jvm' version '1.3.71'
+	id 'com.diffplug.spotless' version '5.10.2'
 }
 
 group 'org.utzcoz.parser.dumpsys'
 version '0.2'
 
 repositories {
-    mavenCentral()
+	mavenCentral()
+}
+
+spotless {
+	kotlin {
+		target '**/*.kt'
+		ktlint()userData(['max_line_length': '100'])
+	}
+	format 'misc', {
+		// define the files to apply `misc` to
+		target '*.gradle', '*.md', '.gitignore'
+
+		// define the steps to apply to those files
+		trimTrailingWhitespace()
+		indentWithTabs() // or spaces. Takes an integer argument if you don't like 4
+		endWithNewline()
+	}
 }
 
 dependencies {
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
-    testCompile group: 'junit', name: 'junit', version: '4.12'
+	implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
+	testCompile group: 'junit', name: 'junit', version: '4.12'
 }
 
 compileKotlin {
-    kotlinOptions.jvmTarget = "1.8"
+	kotlinOptions.jvmTarget = "1.8"
 }
 compileTestKotlin {
-    kotlinOptions.jvmTarget = "1.8"
+	kotlinOptions.jvmTarget = "1.8"
 }
 
 jar {
-    manifest {
-        attributes(
-                'Implementation-Title': project.name,
-                'Implementation-Version': project.version,
-                'Main-Class': 'com.utzcoz.parser.dumpsys.DumpsysParser'
-        )
-    }
+	manifest {
+		attributes(
+				'Implementation-Title': project.name,
+				'Implementation-Version': project.version,
+				'Main-Class': 'com.utzcoz.parser.dumpsys.DumpsysParser'
+		)
+	}
 }

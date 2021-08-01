@@ -50,7 +50,8 @@ class DumpsysParser {
             println()
             println("Show help info: java -jar dumpsys-result-parser.jar -h")
             println()
-            println("Parse specific info: java -jar dumpsys-result-parser.jar -p PARSE-NAME -- SUB-COMMANDS")
+            println("Parse specific info: java -jar dumpsys-result-parser.jar -p " +
+                    "PARSE-NAME -- SUB-COMMANDS")
             println()
             println("PARSE-NAME:")
             println("$spaceIndent$surfaceFlingerParserName: parse dumpsys SurfaceFlinger result")
