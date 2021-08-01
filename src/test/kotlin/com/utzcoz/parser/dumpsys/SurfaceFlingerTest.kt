@@ -1,12 +1,12 @@
 package com.utzcoz.parser.dumpsys
 
-import org.junit.Assert.assertEquals
-import org.junit.After
-import org.junit.Before
-import org.junit.Test
 import java.io.ByteArrayOutputStream
 import java.io.File
 import java.io.PrintStream
+import org.junit.After
+import org.junit.Assert.assertEquals
+import org.junit.Before
+import org.junit.Test
 
 class SurfaceFlingerTest {
     private val outContent = ByteArrayOutputStream()
@@ -26,7 +26,8 @@ class SurfaceFlingerTest {
     fun testAOSP9DumpBufferLayerTree() {
         val absolutePath: String = TestUtil.getAOSP9DumpsysSurfaceFlingerTestFilePath()
         val surfaceFlingerDumpsysString = File(absolutePath).readText()
-        val surfaceFlinger = SurfaceFlingerParser.parseSurfaceFlingerDumpsys(surfaceFlingerDumpsysString)
+        val surfaceFlinger =
+            SurfaceFlingerParser.parseSurfaceFlingerDumpsys(surfaceFlingerDumpsysString)
         surfaceFlinger.dumpBufferLayerTree()
         val expects = """
 |-- Display Overlays#0, isOpaque 0, region Rect(0, 0, 3840, 3840)
@@ -75,7 +76,8 @@ class SurfaceFlingerTest {
     fun testAOSP10DumpBufferLayerTree() {
         val absolutePath: String = TestUtil.getAOSP10DumpsysSurfaceFlingerTestFilePath()
         val surfaceFlingerDumpsysString = File(absolutePath).readText()
-        val surfaceFlinger = SurfaceFlingerParser.parseSurfaceFlingerDumpsys(surfaceFlingerDumpsysString)
+        val surfaceFlinger =
+            SurfaceFlingerParser.parseSurfaceFlingerDumpsys(surfaceFlingerDumpsysString)
         surfaceFlinger.dumpBufferLayerTree()
         val expects = """
 |-- Display Overlays#0, isOpaque 0, region Rect(0, 0, 0, 0)

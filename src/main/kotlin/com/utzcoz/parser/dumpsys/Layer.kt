@@ -50,10 +50,11 @@ open class Layer(
          *      other-info
          */
         fun parseLayer(input: String): Layer {
-            if (!input.startsWith("+ BufferLayer")
-                && !input.startsWith("+ ContainerLayer")
-                && !input.startsWith("+ ColorLayer")) {
-                throw IllegalArgumentException("Valid buffer layer string should start with + BufferLayer")
+            if (!input.startsWith("+ BufferLayer") &&
+                !input.startsWith("+ ContainerLayer") &&
+                !input.startsWith("+ ColorLayer")) {
+                throw IllegalArgumentException("Valid buffer layer string should start with" +
+                        " + BufferLayer")
             }
 
             // Parse name
@@ -153,7 +154,7 @@ open class Layer(
             if (values.size == 2) {
                 return Pair(Integer.parseInt(values[0]), Integer.parseInt(values[1]))
             }
-            return Pair(Integer.MIN_VALUE, Integer.MIN_VALUE);
+            return Pair(Integer.MIN_VALUE, Integer.MIN_VALUE)
         }
 
         private fun parseSize(input: String): Pair<Int, Int> {
@@ -164,7 +165,7 @@ open class Layer(
             if (values.size == 2) {
                 return Pair(values[0].trim().toInt(), values[1].trim().toInt())
             }
-            return Pair(Integer.MIN_VALUE, Integer.MIN_VALUE);
+            return Pair(Integer.MIN_VALUE, Integer.MIN_VALUE)
         }
 
         private fun parseOpaque(input: String): Int {

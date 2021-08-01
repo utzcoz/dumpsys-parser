@@ -1,10 +1,10 @@
 package com.utzcoz.parser.dumpsys
 
-import org.junit.Assert.assertEquals
-import org.junit.Test
 import java.io.File
 import java.nio.file.Path
 import java.nio.file.Paths
+import org.junit.Assert.assertEquals
+import org.junit.Test
 
 class LayerTest {
     @Test

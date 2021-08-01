@@ -1,11 +1,11 @@
 package com.utzcoz.parser.dumpsys
 
+import java.io.ByteArrayOutputStream
+import java.io.PrintStream
 import org.junit.After
 import org.junit.Assert.assertEquals
 import org.junit.Before
 import org.junit.Test
-import java.io.ByteArrayOutputStream
-import java.io.PrintStream
 
 class DumpsysParserTest {
     private val outContent = ByteArrayOutputStream()
