@@ -2,8 +2,8 @@ package com.utzcoz.parser.dumpsys
 
 class SurfaceFlingerParser {
     companion object {
-        const val blTreeCommand = "-bl-tree"
-        const val parserName = "surfaceflinger"
+        const val BUFFER_LAYER_TREE_COMMAND = "-bl-tree"
+        const val SF_PARSER_NAME = "surfaceflinger"
 
         fun parseSurfaceFlingerDumpsys(input: String): SurfaceFlinger {
             val bufferLayers = extractBufferLayerPart(input).map { Layer.parseLayer(it) }
@@ -12,7 +12,10 @@ class SurfaceFlingerParser {
             return SurfaceFlinger(bufferLayers + containerLayers + colorLayers)
         }
 
-        private fun extractLayerPart(input: String, anchor: String): List<String> {
+        private fun extractLayerPart(
+            input: String,
+            anchor: String,
+        ): List<String> {
             var left = input
             var currentIndex = left.indexOf(anchor)
             val bufferLayers = ArrayList<String>()
@@ -40,8 +43,11 @@ class SurfaceFlingerParser {
             return extractLayerPart(input, "+ ColorLayer")
         }
 
-        fun parse(subCommands: List<String>, content: String) {
-            if (subCommands.contains(blTreeCommand)) {
+        fun parse(
+            subCommands: List<String>,
+            content: String,
+        ) {
+            if (subCommands.contains(BUFFER_LAYER_TREE_COMMAND)) {
                 val surfaceFlinger = parseSurfaceFlingerDumpsys(content)
                 surfaceFlinger.dumpBufferLayerTree()
                 return
@@ -49,8 +55,8 @@ class SurfaceFlingerParser {
         }
 
         fun showSupportCommands(indent: String) {
-            println("$indent$parserName:")
-            println("$indent$indent$blTreeCommand show buffer layer tree")
+            println("$indent$SF_PARSER_NAME:")
+            println("$indent$indent$BUFFER_LAYER_TREE_COMMAND show buffer layer tree")
         }
     }
 }

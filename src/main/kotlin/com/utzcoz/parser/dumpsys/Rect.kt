@@ -8,14 +8,16 @@ open class Rect(val left: Int, val top: Int, val right: Int, val bottom: Int) {
         fun parseRect(input: String): Rect {
             val splits = input.split(",")
             if (splits.size != 4) {
-                throw IllegalArgumentException("The valid rect string pattern is left" +
-                        ", top, width, height")
+                throw IllegalArgumentException(
+                    "The valid rect string pattern is left" +
+                        ", top, width, height",
+                )
             }
             return Rect(
                 splits[0].trim().toInt(),
                 splits[1].trim().toInt(),
                 splits[2].trim().toInt(),
-                splits[3].trim().toInt()
+                splits[3].trim().toInt(),
             )
         }
     }
@@ -25,9 +27,9 @@ open class Rect(val left: Int, val top: Int, val right: Int, val bottom: Int) {
             return false
         }
         return left == other.left &&
-                top == other.top &&
-                right == other.right &&
-                bottom == other.bottom
+            top == other.top &&
+            right == other.right &&
+            bottom == other.bottom
     }
 
     override fun hashCode(): Int {
@@ -45,6 +47,6 @@ open class Rect(val left: Int, val top: Int, val right: Int, val bottom: Int) {
             max(left, rect.left),
             max(top, rect.top),
             min(right, rect.right),
-            min(bottom, rect.bottom)
+            min(bottom, rect.bottom),
         )
 }

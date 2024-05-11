@@ -1,9 +1,9 @@
 package com.utzcoz.parser.dumpsys
 
-import java.io.File
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertNotNull
 import org.junit.Test
+import java.io.File
 
 class SurfaceFlingerParserTest {
     @Test

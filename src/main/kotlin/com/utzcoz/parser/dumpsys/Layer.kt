@@ -8,7 +8,7 @@ open class Layer(
     val position: Pair<Int, Int>,
     val size: Pair<Int, Int>,
     val isOpaque: Int,
-    val parent: String?
+    val parent: String?,
 ) {
     companion object {
         /**
@@ -52,9 +52,12 @@ open class Layer(
         fun parseLayer(input: String): Layer {
             if (!input.startsWith("+ BufferLayer") &&
                 !input.startsWith("+ ContainerLayer") &&
-                !input.startsWith("+ ColorLayer")) {
-                throw IllegalArgumentException("Valid buffer layer string should start with" +
-                        " + BufferLayer")
+                !input.startsWith("+ ColorLayer")
+            ) {
+                throw IllegalArgumentException(
+                    "Valid buffer layer string should start with" +
+                        " + BufferLayer",
+                )
             }
 
             // Parse name
@@ -90,7 +93,7 @@ open class Layer(
                 position,
                 size,
                 isOpaque,
-                parent
+                parent,
             )
         }
 
@@ -104,12 +107,16 @@ open class Layer(
             return parentLine.substring(parentLine.indexOf("=") + 1)
         }
 
-        private fun parse(input: String, left: String, right: String): Pair<String, String> {
+        private fun parse(
+            input: String,
+            left: String,
+            right: String,
+        ): Pair<String, String> {
             val leftIndex = input.indexOf(left)
             val rightIndex = input.indexOf(right)
             return Pair(
                 input.substring(leftIndex + 1, rightIndex),
-                input.substring(rightIndex + 1)
+                input.substring(rightIndex + 1),
             )
         }
 
@@ -132,7 +139,10 @@ open class Layer(
             return Rect(-1, -1, -1, -1)
         }
 
-        private fun parseSimpleInt(input: String, anchor: String): Int {
+        private fun parseSimpleInt(
+            input: String,
+            anchor: String,
+        ): Int {
             val startIndex = input.indexOf(anchor) + anchor.length
             val endIndex = input.indexOf(",", startIndex)
             return input.substring(startIndex, endIndex).trim().toInt()
