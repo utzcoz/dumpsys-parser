@@ -16,7 +16,7 @@ repositories {
 spotless {
 	kotlin {
 		target '**/*.kt'
-		ktlint()userData(['max_line_length': '100'])
+		ktlint()
 	}
 	format 'misc', {
 		// define the files to apply `misc` to
