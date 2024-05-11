@@ -1,11 +1,11 @@
 package com.utzcoz.parser.dumpsys
 
-import java.io.ByteArrayOutputStream
-import java.io.PrintStream
 import org.junit.After
 import org.junit.Assert.assertEquals
 import org.junit.Before
 import org.junit.Test
+import java.io.ByteArrayOutputStream
+import java.io.PrintStream
 
 class DumpsysParserTest {
     private val outContent = ByteArrayOutputStream()
@@ -27,21 +27,21 @@ class DumpsysParserTest {
         DumpsysParser.main(args)
         val helpCommandPrints =
             """
-                DumpsysParser arguments [-h]
+            DumpsysParser arguments [-h]
 
-                Dumpsys result parser
+            Dumpsys result parser
 
-                Show help info: java -jar dumpsys-result-parser.jar -h
+            Show help info: java -jar dumpsys-result-parser.jar -h
 
-                Parse specific info: java -jar dumpsys-result-parser.jar -p PARSE-NAME -- SUB-COMMANDS
+            Parse specific info: java -jar dumpsys-result-parser.jar -p PARSE-NAME -- SUB-COMMANDS
 
-                PARSE-NAME:
-                    ${SurfaceFlingerParser.parserName}: parse dumpsys SurfaceFlinger result
+            PARSE-NAME:
+                ${SurfaceFlingerParser.SF_PARSER_NAME}: parse dumpsys SurfaceFlinger result
 
-                SUB-COMMANDS
-                    ${SurfaceFlingerParser.parserName}:
-                        ${SurfaceFlingerParser.blTreeCommand} show buffer layer tree
-                
+            SUB-COMMANDS
+                ${SurfaceFlingerParser.SF_PARSER_NAME}:
+                    ${SurfaceFlingerParser.BUFFER_LAYER_TREE_COMMAND} show buffer layer tree
+            
             """.trimIndent()
         assertEquals(helpCommandPrints, outContent.toString())
     }
@@ -52,10 +52,10 @@ class DumpsysParserTest {
         DumpsysParser.main(args)
         val prints =
             """
-                DumpsysParser arguments []
+            DumpsysParser arguments []
 
-                Please use -p to select parser to parse content
-                
+            Please use -p to select parser to parse content
+            
             """.trimIndent()
         assertEquals(prints, outContent.toString())
     }
@@ -66,10 +66,10 @@ class DumpsysParserTest {
         DumpsysParser.main(args)
         val prints =
             """
-                DumpsysParser arguments [-p]
+            DumpsysParser arguments [-p]
 
-                Please use -p to select parser to parse content
-                
+            Please use -p to select parser to parse content
+            
             """.trimIndent()
         assertEquals(prints, outContent.toString())
     }
@@ -81,10 +81,10 @@ class DumpsysParserTest {
         DumpsysParser.main(args)
         val prints =
             """
-                DumpsysParser arguments [-f, $filePath]
+            DumpsysParser arguments [-f, $filePath]
 
-                Please use -p to select parser to parse content
-                
+            Please use -p to select parser to parse content
+            
             """.trimIndent()
         assertEquals(prints, outContent.toString())
     }
@@ -92,15 +92,15 @@ class DumpsysParserTest {
     @Test
     fun testWithoutMinusMinus() {
         val filePath = TestUtil.getAOSP9DumpsysSurfaceFlingerTestFilePath()
-        val parseName = SurfaceFlingerParser.parserName
+        val parseName = SurfaceFlingerParser.SF_PARSER_NAME
         val args = arrayOf("-p", parseName, "-f", filePath)
         DumpsysParser.main(args)
         val prints =
             """
-                DumpsysParser arguments [-p, $parseName, -f, $filePath]
+            DumpsysParser arguments [-p, $parseName, -f, $filePath]
 
-                Please use -- to separate sub-commands for specific parser
-                
+            Please use -- to separate sub-commands for specific parser
+            
             """.trimIndent()
         assertEquals(prints, outContent.toString())
     }
@@ -108,14 +108,14 @@ class DumpsysParserTest {
     @Test
     fun testWithNonExistFile() {
         val filePath = TestUtil.getAOSP9DumpsysSurfaceFlingerTestFilePath() + "non-exist"
-        val parseName = SurfaceFlingerParser.parserName
+        val parseName = SurfaceFlingerParser.SF_PARSER_NAME
         val args = arrayOf("-p", parseName, "-f", filePath, "--")
         DumpsysParser.main(args)
         val prints =
             """
-                DumpsysParser arguments [-p, $parseName, -f, $filePath, --]
+            DumpsysParser arguments [-p, $parseName, -f, $filePath, --]
 
-                Please provide exist file with -f
+            Please provide exist file with -f
 
             """.trimIndent()
         assertEquals(prints, outContent.toString())
@@ -124,12 +124,12 @@ class DumpsysParserTest {
     @Test
     fun testWithCompleteSurfaceFlingerCommand() {
         val filePath = TestUtil.getAOSP9DumpsysSurfaceFlingerTestFilePath()
-        val parseName = SurfaceFlingerParser.parserName
+        val parseName = SurfaceFlingerParser.SF_PARSER_NAME
         val args = arrayOf("-p", parseName, "-f", filePath, "--")
         DumpsysParser.main(args)
         val prints =
             """
-                DumpsysParser arguments [-p, $parseName, -f, $filePath, --]
+            DumpsysParser arguments [-p, $parseName, -f, $filePath, --]
 
 
             """.trimIndent()
@@ -144,9 +144,9 @@ class DumpsysParserTest {
         DumpsysParser.main(args)
         val prints =
             """
-                DumpsysParser arguments [-p, $parseName, -f, $filePath, --]
+            DumpsysParser arguments [-p, $parseName, -f, $filePath, --]
 
-                We don't support parser unsupported-parser now.
+            We don't support parser unsupported-parser now.
 
             """.trimIndent()
         assertEquals(prints, outContent.toString())

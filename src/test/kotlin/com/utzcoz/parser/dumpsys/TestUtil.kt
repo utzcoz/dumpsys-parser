@@ -13,8 +13,12 @@ class TestUtil {
 
         fun getAOSP10DumpsysSurfaceFlingerTestFilePath(): String {
             val path: Path =
-                Paths.get("src", "test", "resources",
-                    "aosp-10-normal-dumpsys-surfaceflinger-result")
+                Paths.get(
+                    "src",
+                    "test",
+                    "resources",
+                    "aosp-10-normal-dumpsys-surfaceflinger-result",
+                )
             return path.toFile().absolutePath
         }
     }

@@ -36,19 +36,24 @@ class SurfaceFlinger(val layers: List<Layer>) {
         }
     }
 
-    private fun dumpBufferLayerBranch(root: Layer, isLast: Boolean, indent: String) {
+    private fun dumpBufferLayerBranch(
+        root: Layer,
+        isLast: Boolean,
+        indent: String,
+    ) {
         print(indent)
         if (isLast) {
             print("`-- ")
         } else {
             print("|-- ")
         }
-        val fullRegion = Rect(
-            root.position.first,
-            root.position.second,
-            root.position.first + root.size.first,
-            root.position.second + root.size.second
-        )
+        val fullRegion =
+            Rect(
+                root.position.first,
+                root.position.second,
+                root.position.first + root.size.first,
+                root.position.second + root.size.second,
+            )
         println("${root.name}, isOpaque ${root.isOpaque}, region $fullRegion")
         val newIndent = if (isLast) "$indent    " else "$indent|   "
         val childList = childMap[root]

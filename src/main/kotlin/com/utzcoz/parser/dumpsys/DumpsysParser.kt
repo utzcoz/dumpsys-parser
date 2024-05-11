@@ -3,10 +3,9 @@ package com.utzcoz.parser.dumpsys
 import java.io.File
 
 class DumpsysParser {
-
     companion object {
-        private const val spaceIndent = "    "
-        private const val surfaceFlingerParserName = "surfaceflinger"
+        private const val SPACE_INDENT = "    "
+        private const val SF_PARSER_NAME = "surfaceflinger"
 
         @JvmStatic
         fun main(args: Array<String>) {
@@ -38,7 +37,7 @@ class DumpsysParser {
             }
             val subCommands = args.slice(5 until args.size)
             when (parser) {
-                surfaceFlingerParserName ->
+                SF_PARSER_NAME ->
                     SurfaceFlingerParser.parse(subCommands, file.readText())
                 else ->
                     println("We don't support parser $parser now.")
@@ -50,14 +49,16 @@ class DumpsysParser {
             println()
             println("Show help info: java -jar dumpsys-result-parser.jar -h")
             println()
-            println("Parse specific info: java -jar dumpsys-result-parser.jar -p " +
-                    "PARSE-NAME -- SUB-COMMANDS")
+            println(
+                "Parse specific info: java -jar dumpsys-result-parser.jar -p " +
+                    "PARSE-NAME -- SUB-COMMANDS",
+            )
             println()
             println("PARSE-NAME:")
-            println("$spaceIndent$surfaceFlingerParserName: parse dumpsys SurfaceFlinger result")
+            println("$SPACE_INDENT$SF_PARSER_NAME: parse dumpsys SurfaceFlinger result")
             println()
             println("SUB-COMMANDS")
-            SurfaceFlingerParser.showSupportCommands(spaceIndent)
+            SurfaceFlingerParser.showSupportCommands(SPACE_INDENT)
         }
     }
 }
