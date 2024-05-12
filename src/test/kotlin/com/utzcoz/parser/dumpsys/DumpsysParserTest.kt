@@ -1,9 +1,9 @@
 package com.utzcoz.parser.dumpsys
 
-import org.junit.After
-import org.junit.Assert.assertEquals
-import org.junit.Before
-import org.junit.Test
+import org.junit.jupiter.api.AfterEach
+import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.BeforeEach
+import org.junit.jupiter.api.Test
 import java.io.ByteArrayOutputStream
 import java.io.PrintStream
 
@@ -11,12 +11,12 @@ class DumpsysParserTest {
     private val outContent = ByteArrayOutputStream()
     private val originOutContent: PrintStream = System.out
 
-    @Before
+    @BeforeEach
     fun setUp() {
         System.setOut(PrintStream(outContent))
     }
 
-    @After
+    @AfterEach
     fun tearDown() {
         System.setOut(originOutContent)
     }

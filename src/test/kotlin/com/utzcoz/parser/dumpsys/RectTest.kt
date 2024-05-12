@@ -1,10 +1,10 @@
 package com.utzcoz.parser.dumpsys
 
-import org.junit.Assert.assertEquals
-import org.junit.Assert.assertFalse
-import org.junit.Assert.assertNotEquals
-import org.junit.Assert.assertTrue
-import org.junit.Test
+import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.Assertions.assertFalse
+import org.junit.jupiter.api.Assertions.assertNotEquals
+import org.junit.jupiter.api.Assertions.assertTrue
+import org.junit.jupiter.api.Test
 
 class RectTest {
     @Test
@@ -17,10 +17,12 @@ class RectTest {
         assertEquals(400, rect.bottom)
     }
 
-    @Test(expected = IllegalArgumentException::class)
+    @Test
     fun testParseRectWithInvalidString() {
-        val input = "100, 200, 300"
-        Rect.parseRect(input)
+        org.junit.jupiter.api.assertThrows<IllegalArgumentException> {
+            val input = "100, 200, 300"
+            Rect.parseRect(input)
+        }
     }
 
     @Test
