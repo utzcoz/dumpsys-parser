@@ -1,1 +1,1 @@
-rootProject.name.set("dumpsys-parser")
+rootProject.name = "dumpsys-parser"

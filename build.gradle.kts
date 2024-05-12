@@ -1,3 +1,5 @@
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
+
 plugins {
 	id("com.github.johnrengelman.shadow") version "8.1.1"
 	id("java")
@@ -5,8 +7,8 @@ plugins {
 	id("com.diffplug.spotless") version "6.25.0"
 }
 
-group "org.utzcoz.parser.dumpsys"
-version "0.2"
+group = "org.utzcoz.parser.dumpsys"
+version = "0.2"
 
 repositories {
 	mavenCentral()
@@ -18,7 +20,7 @@ spotless {
 		target("**/*.kt")
 		ktlint()
 	}
-	format "misc", {
+	format("misc") {
 		// define the files to apply `misc` to
 		target("*.gradle", "*.md", ".gitignore")
 
@@ -39,12 +41,10 @@ java {
 	toolchain.languageVersion.set(JavaLanguageVersion.of(8))
 }
 
-compileKotlin {
-	kotlinOptions.jvmTarget.set("1.8")
-}
-
-compileTestKotlin {
-	kotlinOptions.jvmTarget.set("1.8")
+kotlin {
+	compilerOptions {
+		jvmTarget.set(JvmTarget.JVM_1_8)
+	}
 }
 
 tasks.test {
@@ -54,9 +54,9 @@ tasks.test {
 tasks.jar {
 	manifest {
 		attributes(
-				"Implementation-Title": project.name,
-				"Implementation-Version": project.version,
-				"Main-Class": "com.utzcoz.parser.dumpsys.DumpsysParser"
+				"Implementation-Title" to project.name,
+				"Implementation-Version" to project.version,
+				"Main-Class" to "com.utzcoz.parser.dumpsys.DumpsysParser"
 		)
 	}
 }
