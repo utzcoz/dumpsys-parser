@@ -47,11 +47,11 @@ compileTestKotlin {
 	kotlinOptions.jvmTarget = "1.8"
 }
 
-test {
+tasks.test {
 	useJUnitPlatform()
 }
 
-jar {
+tasks.jar {
 	manifest {
 		attributes(
 				"Implementation-Title": project.name,
