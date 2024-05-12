@@ -1,0 +1,8 @@
++ EffectLayer (Task=5#0)
+  Region TransparentRegion (this=0 count=0)
+  Region VisibleRegion (this=0 count=0)
+  Region SurfaceDamageRegion (this=0 count=0)
+      layerStack=   0, z=        5, pos=(1290,0), size=(   0,   0), crop=[  0,   0, 1270, 1600], cornerRadius=0.000000, isProtected=0, isOpaque=1, invalidate=0, dataspace=Default, defaultPixelFormat=Unknown/None, backgroundBlurRadius=0, color=(-1.000,-1.000,-1.000,1.000), flags=0x00000000, tr=[0.00, 0.00][0.00, 0.00]
+      parent=DefaultTaskDisplayArea#0
+      zOrderRelativeOf=none
+      activeBuffer=[   0x   0:   0,Unknown/None], tr=[0.00, 0.00][0.00, 0.00] queued-frames=0, mRefreshPending=0, metadata={taskId:5}, cornerRadiusCrop=[0.00, 0.00, 0.00, 0.00],  shadowRadius=0.000,
