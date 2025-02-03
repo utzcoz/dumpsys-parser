@@ -1,6 +1,8 @@
 package com.utzcoz.parser.dumpsys
 
-class SurfaceFlinger(val layers: List<Layer>) {
+class SurfaceFlinger(
+    val layers: List<Layer>,
+) {
     private val childMap = HashMap<Layer, MutableList<Layer>>()
 
     // We use this field to store the layers without parent.

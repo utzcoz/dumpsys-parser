@@ -97,9 +97,7 @@ open class Layer(
             )
         }
 
-        private fun parseBracket(input: String): Pair<String, String> {
-            return parse(input, "(", ")")
-        }
+        private fun parseBracket(input: String): Pair<String, String> = parse(input, "(", ")")
 
         private fun parseParent(input: String): String {
             val lines = splits(input)
@@ -120,9 +118,7 @@ open class Layer(
             )
         }
 
-        private fun splits(input: String): List<String> {
-            return input.lines().map { it.trimIndent() }.filter { it.isNotBlank() }
-        }
+        private fun splits(input: String): List<String> = input.lines().map { it.trimIndent() }.filter { it.isNotBlank() }
 
         private fun parseVisibleRegion(input: String): Rect {
             // Find the first index of "Region VisibleRegion"
@@ -148,13 +144,9 @@ open class Layer(
             return input.substring(startIndex, endIndex).trim().toInt()
         }
 
-        private fun parseLayerStack(input: String): Int {
-            return parseSimpleInt(input, "layerStack=")
-        }
+        private fun parseLayerStack(input: String): Int = parseSimpleInt(input, "layerStack=")
 
-        private fun parseZ(input: String): Int {
-            return parseSimpleInt(input, "z=")
-        }
+        private fun parseZ(input: String): Int = parseSimpleInt(input, "z=")
 
         private fun parsePosition(input: String): Pair<Int, Int> {
             val anchor = "pos=("
@@ -178,8 +170,6 @@ open class Layer(
             return Pair(Integer.MIN_VALUE, Integer.MIN_VALUE)
         }
 
-        private fun parseOpaque(input: String): Int {
-            return parseSimpleInt(input, "isOpaque=")
-        }
+        private fun parseOpaque(input: String): Int = parseSimpleInt(input, "isOpaque=")
     }
 }
