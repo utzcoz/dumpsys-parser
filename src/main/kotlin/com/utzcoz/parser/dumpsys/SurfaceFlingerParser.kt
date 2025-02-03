@@ -31,17 +31,11 @@ class SurfaceFlingerParser {
             return bufferLayers
         }
 
-        private fun extractBufferLayerPart(input: String): List<String> {
-            return extractLayerPart(input, "+ BufferLayer")
-        }
+        private fun extractBufferLayerPart(input: String): List<String> = extractLayerPart(input, "+ BufferLayer")
 
-        private fun extractContainerLayerPart(input: String): List<String> {
-            return extractLayerPart(input, "+ ContainerLayer")
-        }
+        private fun extractContainerLayerPart(input: String): List<String> = extractLayerPart(input, "+ ContainerLayer")
 
-        private fun extractColorLayerPart(input: String): List<String> {
-            return extractLayerPart(input, "+ ColorLayer")
-        }
+        private fun extractColorLayerPart(input: String): List<String> = extractLayerPart(input, "+ ColorLayer")
 
         fun parse(
             subCommands: List<String>,

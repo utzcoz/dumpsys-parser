@@ -3,7 +3,12 @@ package com.utzcoz.parser.dumpsys
 import kotlin.math.max
 import kotlin.math.min
 
-open class Rect(val left: Int, val top: Int, val right: Int, val bottom: Int) {
+open class Rect(
+    val left: Int,
+    val top: Int,
+    val right: Int,
+    val bottom: Int,
+) {
     companion object {
         fun parseRect(input: String): Rect {
             val splits = input.split(",")
@@ -32,13 +37,9 @@ open class Rect(val left: Int, val top: Int, val right: Int, val bottom: Int) {
             bottom == other.bottom
     }
 
-    override fun hashCode(): Int {
-        return ((left * 32 + top) * 32 + right) * 32 + bottom
-    }
+    override fun hashCode(): Int = ((left * 32 + top) * 32 + right) * 32 + bottom
 
-    override fun toString(): String {
-        return "Rect($left, $top, $right, $bottom)"
-    }
+    override fun toString(): String = "Rect($left, $top, $right, $bottom)"
 
     fun isValid(): Boolean = right > left && bottom > top
 
