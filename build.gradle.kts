@@ -4,7 +4,7 @@ plugins {
     id("com.github.johnrengelman.shadow") version "8.1.1"
     id("java")
     id("org.jetbrains.kotlin.jvm") version "2.1.10"
-    id("com.diffplug.spotless") version "6.25.0"
+    id("com.diffplug.spotless") version "7.0.2"
 }
 
 group = "org.utzcoz.parser.dumpsys"
